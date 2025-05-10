@@ -15,7 +15,7 @@ GITHUB_STATUS_URL = "https://raw.githubusercontent.com/Princess0285/BloxPieceHub
 GITHUB_VERSION_URL = "https://raw.githubusercontent.com/Princess0285/BloxPieceHub-Cloud/main/version.txt"
 DISCORD_INVITE = "https://discord.gg/YOUR_INVITE_LINK"
 EXECUTOR_LINKS = {
-    "Arsenal": "https://example.com/arsenal",
+    "Swift": "https://example.com/arsenal",
     "BloxFruits": "https://example.com/bloxfruits"
 }
 
