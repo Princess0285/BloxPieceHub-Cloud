@@ -1,6 +1,6 @@
 {
     "AutoFarm": "online",
-    "Teleport": "offline",
+    "Teleport": "online",
     "Arsenal": "offline",
     "BloxFruits": "offline"
 }
