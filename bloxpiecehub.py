@@ -48,7 +48,7 @@ class BloxPieceHub:
     def setup_core(self):
         self.keys_file = "key_banks.json"
         self.key_banks = self.load_key_banks()
-        self.current_bank = tk.StringVar(value=list(self.key_banks.keys())[0]
+        self.current_bank = tk.StringVar(value=list(self.key_banks.keys())[0])
         
         self.root.title("BloxPieceHub v2.0")
         self.root.geometry("1200x800")
