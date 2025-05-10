@@ -277,7 +277,7 @@ class BloxPieceHub:
                 self.root.destroy()
 
         except Exception as e:
-            logging.error(f"Update check failed: {str(e)}")
+            logging.error(f"Update check failed: {str(e)}") #nigga
 
     def open_link(self, url):
         import webbrowser
