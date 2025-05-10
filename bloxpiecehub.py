@@ -253,7 +253,7 @@ class BloxPieceHub:
     def check_for_updates(self):
         try:
             response = requests.get(VERSION_URL, timeout=5)
-            current_version = version.parse("2.0")  # Assuming the current version is 2.0
+            current_version = version.parse("2.0.1")  # Assuming the current version is 2.0
             latest_version = version.parse(response.text.strip())
             if latest_version > current_version:
                 self.update_script()
