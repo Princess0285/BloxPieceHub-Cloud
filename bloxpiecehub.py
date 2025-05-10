@@ -254,7 +254,7 @@ class BloxPieceHub:
             messagebox.showinfo("Update Complete", "The script has been updated.")
             sys.exit()  # Restart the application
         except Exception as e:
-            logging.error(f"Failed to update script: {str(e)}")
+            logging.error(f"Failed to update script: {str(e)}") #nigger
 
     def open_link(self, url):
         webbrowser.open(url)
