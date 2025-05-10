@@ -11,6 +11,7 @@ from datetime import datetime
 from random import choice
 from packaging import version
 import webbrowser
+import subprocess
 
 # ======================== CONFIGURATION ========================
 GITHUB_REPO = "https://raw.githubusercontent.com/Princess0285/BloxPieceHub-Cloud/main"
@@ -58,7 +59,7 @@ class BloxPieceHub:
         self.style.theme_use('clam')
         self.configure_styles()
         
-        logging.basicConfig(filename='hub_errors.log', level=logging.ERROR)
+        logging.basicConfig(filename='hub_errors.log', level=logging.ERROR, encoding='utf-8')
 
     def configure_styles(self):
         style_config = {
@@ -168,7 +169,7 @@ class BloxPieceHub:
     def load_key_banks(self):
         try:
             if os.path.exists(self.keys_file):
-                with open(self.keys_file, 'r') as f:
+                with open(self.keys_file, 'r', encoding='utf-8') as f:
                     return json.load(f)
             return {"Main Bank": []}
         except Exception as e:
@@ -177,8 +178,8 @@ class BloxPieceHub:
 
     def save_key_banks(self):
         try:
-            with open(self.keys_file, 'w') as f:
-                json.dump(self.key_banks, f)
+            with open(self.keys_file, 'w', encoding='utf-8') as f:
+                json.dump(self.key_banks, f, ensure_ascii=False)
         except Exception as e:
             logging.error(f"Key save error: {str(e)}")
 
@@ -216,51 +217,21 @@ class BloxPieceHub:
             pyperclip.copy(key)
             messagebox.showinfo("Copied", "Key copied to clipboard!")
         else:
-            messagebox.showwarning("Empty Bank", "No keys to copy.")
+            messagebox.showwarning("Empty Bank", "No keys to copy!")
 
     def add_keys(self):
-        current_bank = self.current_bank.get()
-        key = simpledialog.askstring("Add Key", "Enter the key to add:")
-        if key:
-            self.key_banks[current_bank].append(key)
-            self.save_key_banks()
-            messagebox.showinfo("Key Added", "Key successfully added.")
-
-    def update_status(self):
-        try:
-            status_data = requests.get(STATUS_URL).json()
-            for name, status in status_data.items():
-                if name in self.status_indicators:
-                    status_canvas, dot = self.status_indicators[name]
-                    status_canvas.itemconfig(dot, fill=COLOR_SCHEME["online"] if status == "online" else COLOR_SCHEME["offline"])
-        except Exception as e:
-            logging.error(f"Failed to update status: {str(e)}")
-
-    def check_for_updates(self):
-        try:
-            latest_version = requests.get(VERSION_URL).text.strip()
-            current_version = "2.0"  # This would be the version of your app
-            if version.parse(latest_version) > version.parse(current_version):
-                messagebox.showinfo("Update Available", f"A new version {latest_version} is available.")
-                self.update_script()
-        except Exception as e:
-            logging.error(f"Failed to check for updates: {str(e)}")
-
-    def update_script(self):
-        try:
-            script_content = requests.get(SCRIPT_URL).text
-            with open("bloxpiecehub.py", 'w') as f:
-                f.write(script_content)
-            messagebox.showinfo("Update Complete", "The script has been updated.")
-            sys.exit()  # Restart the application
-        except Exception as e:
-            logging.error(f"Failed to update script: {str(e)}") #nigger
-
-    def open_link(self, url):
-        webbrowser.open(url)
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = BloxPieceHub(root)
-    root.mainloop()
-
+        add_window = tk.Toplevel(self.root)
+        add_window.title("Add Keys")
+        text_area = tk.Text(add_window, height=15, width=50)
+        text_area.pack(padx=20, pady=10)
+        def save_keys():
+            new_keys = [k.strip() for k in text_area.get("1.0", tk.END).split('\n') if k.strip()]
+            if new_keys:
+                current_bank = self.current_bank.get()
+                self.key_banks[current_bank].extend(new_keys)
+                self.save_key_banks()
+                messagebox.showinfo("Success", f"Added {len(new_keys)} keys!")
+                add_window.destroy()
+        ttk.Button(add_window
+::contentReference[oaicite:21]{index=21}
+ 
