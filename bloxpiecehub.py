@@ -238,6 +238,7 @@ class BloxPieceHub:
         try:
             response = requests.get(STATUS_URL, timeout=5)
             status_data = response.json()
-            for name, (canvas, oval_id) in self.status_indicators
+            for name, (canvas, oval_id) in self.status_indicators.items():
+
 ::contentReference[oaicite:11]{index=11}
  
