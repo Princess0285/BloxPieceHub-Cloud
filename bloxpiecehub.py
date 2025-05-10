@@ -269,28 +269,6 @@ start python {script_name}
     def open_link(self, url):
         webbrowser.open(url)
 
-    def check_for_updates(self):
-        try:
-            response = requests.get(VERSION_URL, timeout=5)
-            current_version = version.parse("2.0.1")  # Assuming the current version is 2.0
-            latest_version = version.parse(response.text.strip())
-            if latest_version > current_version:
-                self.prompt_update()
-        except Exception as e:
-            logging.error(f"Failed to check for updates: {str(e)}")
-
-    def prompt_update(self):
-        update_response = messagebox.askyesno("Update Available", "A new version is available. Do you want to update?")
-        if update_response:
-            self.update_script()
-
-    def update_script(self):
-        try:
-            response = requests.get(SCRIPT_URL)
-            with open("bloxpiecehub.py", "w", encoding="utf-8") as f:
-                f.write(response.text)
-            messagebox.showinfo("Updated", "BloxPieceHub has been updated to the latest version.")
-            sys.exit()
         except Exception as e:
             logging.error(f"Failed to update script: {str(e)}")
             messagebox.showerror("Error", "Failed to update the script.") #nigga
