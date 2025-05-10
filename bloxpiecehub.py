@@ -232,6 +232,6 @@ class BloxPieceHub:
                 self.save_key_banks()
                 messagebox.showinfo("Success", f"Added {len(new_keys)} keys!")
                 add_window.destroy()
-        ttk.Button(add_window
+        ttk.Button(add_window)
 ::contentReference[oaicite:21]{index=21}
  
