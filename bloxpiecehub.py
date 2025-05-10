@@ -256,21 +256,27 @@ class BloxPieceHub:
             current_version = version.parse("2.0")  # Assuming the current version is 2.0
             latest_version = version.parse(response.text.strip())
             if latest_version > current_version:
-                self.prompt_update()
+                self.update_script()
         except Exception as e:
             logging.error(f"Failed to check for updates: {str(e)}")
 
-    def prompt_update(self):
-        update_response = messagebox.askyesno("Update Available", "A new version is available. Do you want to update?")
-        if update_response:
-            self.update_script()
-
     def update_script(self):
         try:
-            response = requests.get(SCRIPT_URL)
-            with open("bloxpiecehub.py", "w", encoding="utf-8") as f:
-                f.write(response.text)
-            messagebox.showinfo("Updated", "BloxPieceHub has been updated to the latest version.")
+            updater_bat = "bph_updater.bat"
+            script_path = os.path.abspath("bloxpiecehub.py")
+            temp_url = SCRIPT_URL
+            bat_commands = f"""@echo off
+timeout /t 2 >nul
+del "{script_path}" >nul 2>&1
+curl -L "{temp_url}" -o "{script_path}"
+del "{updater_bat}" >nul 2>&1
+start "" python "{script_path}"
+exit
+"""
+            with open(updater_bat, "w", encoding="utf-8") as bat_file:
+                bat_file.write(bat_commands)
+
+            os.startfile(updater_bat)
             sys.exit()
         except Exception as e:
             logging.error(f"Failed to update script: {str(e)}")
