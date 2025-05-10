@@ -246,6 +246,25 @@ class BloxPieceHub:
             self.root.after(120000, self.update_status)
         except Exception as e:
             logging.error(f"Failed to update status: {str(e)}")
+def create_and_run_updater():
+    updater_bat = "update_script.bat"
+    github_url = SCRIPT_URL  # This should be the raw URL to your Python script
+    script_name = "bloxpiecehub.py"
+
+    bat_content = f"""@echo off
+timeout /t 2 >nul
+del "{script_name}"
+powershell -Command "Invoke-WebRequest -Uri '{github_url}' -OutFile '{script_name}'"
+del "%~f0"
+start python {script_name}
+"""
+
+    with open(updater_bat, 'w') as f:
+        f.write(bat_content)
+
+    os.startfile(updater_bat)
+    sys.exit()
+
 
     def open_link(self, url):
         webbrowser.open(url)
