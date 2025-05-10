@@ -253,7 +253,7 @@ class BloxPieceHub:
     def check_for_updates(self):
         try:
             response = requests.get(VERSION_URL, timeout=5)
-            current_version = version.parse("2.0")  # Assuming the current version is 2.0
+            current_version = version.parse("2.0.1")  # Assuming the current version is 2.0
             latest_version = version.parse(response.text.strip())
             if latest_version > current_version:
                 self.prompt_update()
@@ -274,7 +274,7 @@ class BloxPieceHub:
             sys.exit()
         except Exception as e:
             logging.error(f"Failed to update script: {str(e)}")
-            messagebox.showerror("Error", "Failed to update the script.")
+            messagebox.showerror("Error", "Failed to update the script.") #nigga
 
 if __name__ == "__main__":
     root = tk.Tk()
