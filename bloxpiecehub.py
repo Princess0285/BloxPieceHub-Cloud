@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import tkinter as tk
 from tkinter import ttk, messagebox, simpledialog
 import json
@@ -11,7 +12,6 @@ from datetime import datetime
 from random import choice
 from packaging import version
 import webbrowser
-import subprocess
 
 # ======================== CONFIGURATION ========================
 GITHUB_REPO = "https://raw.githubusercontent.com/Princess0285/BloxPieceHub-Cloud/main"
@@ -59,7 +59,7 @@ class BloxPieceHub:
         self.style.theme_use('clam')
         self.configure_styles()
         
-        logging.basicConfig(filename='hub_errors.log', level=logging.ERROR, encoding='utf-8')
+        logging.basicConfig(filename='hub_errors.log', level=logging.ERROR)
 
     def configure_styles(self):
         style_config = {
@@ -179,7 +179,7 @@ class BloxPieceHub:
     def save_key_banks(self):
         try:
             with open(self.keys_file, 'w', encoding='utf-8') as f:
-                json.dump(self.key_banks, f, ensure_ascii=False)
+                json.dump(self.key_banks, f, ensure_ascii=False, indent=4)
         except Exception as e:
             logging.error(f"Key save error: {str(e)}")
 
@@ -232,6 +232,12 @@ class BloxPieceHub:
                 self.save_key_banks()
                 messagebox.showinfo("Success", f"Added {len(new_keys)} keys!")
                 add_window.destroy()
-        ttk.Button(add_window)
-::contentReference[oaicite:21]{index=21}
+        ttk.Button(add_window, text="Save Keys", command=save_keys).pack(pady=10)
+
+    def update_status(self):
+        try:
+            response = requests.get(STATUS_URL, timeout=5)
+            status_data = response.json()
+            for name, (canvas, oval_id) in self.status_indicators
+::contentReference[oaicite:11]{index=11}
  
